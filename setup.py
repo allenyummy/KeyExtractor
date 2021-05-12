@@ -9,7 +9,7 @@ setup(
     author="Yu-Lun Chiang",
     author_email="chiangyulun0914@gmail.com",
     url="https://github.com/allenyummy/KeyExtractor.git",
-    download_url="https://github.com/allenyummy/KeyExtractor/archive/v_01.tar.gz",
+    download_url="https://github.com/allenyummy/KeyExtractor/archive/refs/tags/0.1.0.tar.gz",
     keywords=[
         "Natural Language Processing",
         "Keyword Extraction",
