@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "keyextractor"
+version = "0.1.0"
+description = "KeyExtractor is an easy-to-use keyword extraction technique that leverages transformers-based embeddings to create keywords for chinese documents."
+authors = ["Yu-Lun Chiang <chiangyulun0914@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+torch = "^1.7.1"
+flair = "^0.8.0post1"
+transformers = "^4.5.0"
+ckip-transformers = "^0.2.3"
+pytest = "^6.2.3"
+pytest-mock = "^3.5.1"
+pytest-cov = "^2.11.1"
+black = "^20.8b1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
