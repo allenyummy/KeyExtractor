@@ -1,5 +1,29 @@
-init:
+install:
 	pip install -r requirements.txt
+
+build:
+	python -m build
+
+clean_build:
+	rm -rf build/ && rm -rf dist/ && rm -rf src/KeyExtractor.egg-info/
+
+upload_test:
+	twine upload -r testpypi dist/*
+
+upload:
+	twine upload dist/*
+
+build_and_upload_test:
+	$(MAKE) build && $(MAKE) upload_test
+
+build_and_upload:
+	$(MAKE) build && $(MAKE) upload
+
+pip_download_test:
+	python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps KeyExtractor
+
+pip_install:
+	pip install KeyExtractor
 
 test:
 	nosetests -v tests
