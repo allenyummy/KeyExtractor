@@ -167,8 +167,8 @@ class KeyExtractor:
             results.append(
                 st.KeyStruct(
                     id=i,
-                    keyword=[token for token in each_n_gram],
-                    score=round(score, 4),
+                    keyword=[token for (_, token) in each_n_gram],
+                    score=round(float(score), 4),
                     embeddings=word_embeddings,
                 )
             )
