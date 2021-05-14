@@ -49,6 +49,3 @@ def load(input: Union[str, List[str]]) -> List[str]:
                 ret.append(ipt)
 
     return list(set(ret))
-
-def a():
-    print(1)
