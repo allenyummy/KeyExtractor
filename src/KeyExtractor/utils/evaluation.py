@@ -3,7 +3,6 @@
 # Description: Evaluation for similarity
 
 import logging
-from typing import List
 import torch
 import torch.nn as nn
 
