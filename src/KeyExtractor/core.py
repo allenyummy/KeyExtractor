@@ -81,9 +81,6 @@ class KeyExtractor:
                 content_text.append((i, token))
         logger.debug(content_text)
         logger.debug(f"Finally we got {len(content_text)} content words.")
-        logger.debug(
-            "Check more details by setting logger level to be `logging.DEBUG`."
-        )
         logger.debug("[Step 2] Finish.")
 
         ## Get N-gram
@@ -93,9 +90,6 @@ class KeyExtractor:
             n_gram_text.append(content_text[i : i + n_gram])
         logger.debug(n_gram_text)
         logger.debug(f"Finally we got {len(n_gram_text)} {n_gram}-gram combinations.")
-        logger.debug(
-            "Check more details by setting logger level to be `logging.DEBUG`."
-        )
         logger.debug("[Step 3] Finish.")
 
         return content_text, n_gram_text
@@ -223,9 +217,6 @@ class KeyExtractor:
                 input_w_dup.append(ipt)
         logger.debug(f"Duplicaes: {input_w_dup}")
         logger.debug(f"Finally we removed {len(input_w_dup)} duplicates.")
-        logger.debug(
-            "Check more details by setting logger level to be `logging.DEBUG`."
-        )
         logger.debug("[Step 2] Finish.")
 
         ## Top N
@@ -234,9 +225,6 @@ class KeyExtractor:
         ret = input_wo_dup[:top_n]
         for k in ret:
             logger.debug(k)
-        logger.debug(
-            "Check more details by setting logger level to be `logging.DEBUG`."
-        )
         logger.debug("[Step 3] Finish.")
 
         return ret
