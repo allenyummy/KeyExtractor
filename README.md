@@ -5,7 +5,7 @@
 <!-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OxpgwKqSzODtO3vS7Xe1nEmZMCAIMckX?usp=sharing) -->
 
 # KeyExtractor
-KeyExtractor 是一個十分簡單且好用的關鍵字詞抽取器，該模組透過 Transformer-based 模型，以零訓練的方式，抽取中文文件之關鍵字詞，無需標記資料與GPU資源即可操作。
+KeyExtractor 是一個十分簡單且好用的關鍵字詞抽取器，該模組透過 Transformer-based 模型，以零訓練的方式，抽取中文文件之關鍵字詞，無需標記資料與GPU資源即可操作。
 
 KeyExtractor performs keyword extraction for chinese documents with state-of-the-art transformer models without training and labeled data.
 
@@ -24,7 +24,7 @@ KeyExtractor performs keyword extraction for chinese documents with state-of-the
 ## About
 [Go Back](#toc)
 
-在企業即將滿第一個年頭，感受到的文化與學術界差異甚大，比如說在中研院時，大家追求的是更好更完善的模型或演算法，為了能夠與經典論文上的模型或演算法較勁，大家無不使用相同、公開且乾淨的標記資料集，並實作自己的模型，跑出各種實驗數據，證明模型之間的優劣勝敗。有趣的是，彼此差距往往在不到 1% 之內，不難想像為何那麼難投稿上頂尖研討會了吧！
+在企業即將滿第一個年頭，感受到的文化與學術界差異甚大，比如說在中研院時，大家追求的是更好更完善的模型或演算法，為了能夠與經典論文上的模型或演算法較勁，大家無不使用相同、公開且乾淨的標記資料集，並實作自己的模型，跑出各種實驗數據，證明模型之間的優劣勝敗。有趣的是，彼此差距往往在不到 1% 之內，不難想像為何那麼難投稿上頂尖研討會了吧！
 
 而在企業裡，每個案子有各自獨特的梳理邏輯，與其相應的資料集，而且多半是不完整且骯髒的資料，甚至，這些資料連標記都沒有，導致在導入 AI/NLP 技術時，路途困難重重，大概在清理資料階段、或是人工標記資料階段時就陣亡了，遑論使用最新穎的技術。
 
@@ -43,6 +43,12 @@ KeyExtractor performs keyword extraction for chinese documents with state-of-the
 <a name="installation"></a>
 ### Installation
 
+Prepare virtual environment by conda.
+```
+$ conda create --name [env_name] python=3.8
+$ conda activate [env_name]
+```
+
 Installation can be done using [pypi KeyExtractor](https://pypi.org/project/KeyExtractor/).
 ```
 $ pip install KeyExtractor
@@ -55,7 +61,7 @@ $ PYTHONPATH=./::./src python example/example.py
 ```
 
 <a name="usage"/></a>
-### Usage
+### Basic Usage
 [Go Back](#toc)
 
 * Single Document
