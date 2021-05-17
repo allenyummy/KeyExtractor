@@ -14,10 +14,14 @@ upload:
 	twine upload dist/*
 
 build_and_upload_test:
-	$(MAKE) build && $(MAKE) upload_test
+	$(MAKE) clean_build && \
+	$(MAKE) build && \
+	$(MAKE) upload_test
 
 build_and_upload:
-	$(MAKE) build && $(MAKE) upload
+	$(MAKE) clean_build && \
+	$(MAKE) build && \
+	$(MAKE) upload
 
 pip_download_test:
 	python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps KeyExtractor

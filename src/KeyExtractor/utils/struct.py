@@ -5,7 +5,6 @@
 import logging
 from typing import List, NamedTuple
 import torch
-from torch.autograd.grad_mode import F
 
 logger = logging.getLogger(__name__)
 
