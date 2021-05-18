@@ -228,3 +228,18 @@ class KeyExtractor:
         logger.debug("[Step 3] Finish.")
 
         return ret
+
+    def doc_embeddings(self, text: List[str]) -> torch.tensor:
+        return self._get_doc_embeddings(text)
+
+    def word_embeddings_from_text(
+        self, text: List[str], token_idx: int
+    ) -> torch.tensor:
+        doc = Sentence(text)
+        self.word_embed_model.embed(doc)
+        return doc[token_idx].embedding
+
+    def word_embeddings(self, text: str) -> torch.tensor:
+        word = Sentence(text)
+        self.word_embed_model.embed(word)
+        return word[0].embedding
