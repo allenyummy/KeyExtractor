@@ -79,7 +79,7 @@ text = """
     最佳方案將使演算法能夠正確確定未見實例的類標籤。
     這就要求學習算法以“合理”的方式將訓練數據推廣到看不見的情況（見歸納偏差）。
 """
-tokenized_text_list = tokenizer.tokenize(text_list)[0]  ## Return nested list of tokenized results
+tokenized_text = tokenizer.tokenize(text_list)[0]  ## Return nested list of tokenized results
 ```
 
 Extract Keywords from document tokenized before.
