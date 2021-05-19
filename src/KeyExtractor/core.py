@@ -105,19 +105,45 @@ class KeyExtractor:
         load_default: Optional[bool] = True,
         n_gram: Optional[int] = 1,
     ) -> Union[List[Tuple[int, str]], List[List[Tuple[int, str]]]]:
+        """
+        Preprocess tokenized text into content text and n_gram text.
+        This function is for internal use.
 
-        ## Check if tokenized_text is tokenized
+        Args:
+            `text`        : An input text that is tokenized already.
+            `stopwords`   : A custom stopwords that you think they must not be keywords.
+                            It can take "STOPWORDS", ["STOPWORDS1", "STOPWORDS2", ..], "DIR/STOPWORDS.txt" or ["DIR/STOPWORDS.txt", ...] as input.
+            `load_default`: Whether to load default stopwords. It can be seen from utils/stopwords/zh/*.
+            `n_gram`      : N gram for content words as a keyword candidate.
+        Type:
+            `text`        : list of string
+            `stopwords`   : string or list of string (Default: None)
+            `load_default`: bool (Default: True)
+            `n_gram`      : integer (Default: 1)
+        Return:
+            Content text and N-gram text.
+            rtype1: list of tuple of [integer, string]
+            rtype2: lisr of list of tuple of [integer, string]
+        """
+
+        """ Check args """
+        ## Input text must be tokenized by users.
         if not (isinstance(text, list) and all(isinstance(i, str) for i in text)):
             raise ValueError(
                 "Text must be tokenized ! Expected text to be List[str], but got type(text). "
             )
 
-        ## Get/Load stopwords
+        """ Get/Load Stopwords """
+        ## Load custom stopwords if necessary.
+        ## Load default stopwords if load_default is True.
         logger.debug("[Step 1] Loading stopwords ...")
         stopwords_list = self._load_stopwords(stopwords, load_default)
         logger.debug("[Step 1] Finish.")
 
-        ## Get content words by removing stopwords
+        """ Get Content Words """
+        ## Remove stopwords loaded above from the input tokenized text.
+        ## Obtain content words.
+        ## Also, add original position of each token in content words.
         logger.debug("[Step 2] Getting content words by removing stopwords ...")
         content_text = list()
         for i, token in enumerate(text):
@@ -127,7 +153,8 @@ class KeyExtractor:
         logger.debug(f"Finally we got {len(content_text)} content words.")
         logger.debug("[Step 2] Finish.")
 
-        ## Get N-gram
+        """ Get N-Gram Combinations """
+        ## Get N-gram combinaitons based on content words.
         logger.debug(f"[Step 3] Getting {n_gram}-gram from content words.")
         n_gram_text = list()
         for i in range(len(content_text) - n_gram + 1):
