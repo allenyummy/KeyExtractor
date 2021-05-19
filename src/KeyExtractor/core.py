@@ -170,10 +170,27 @@ class KeyExtractor:
         stopwords: Optional[Union[str, List[str]]] = None,
         load_default: Optional[bool] = True,
     ) -> List[str]:
+        """
+        Load Custom Stopwords as well as Default Stopwords.
+        This function is for internal use.
 
+        Args:
+            `stopwords`   : A custom stopwords that you think they must not be keywords.
+                            It can take "STOPWORDS", ["STOPWORDS1", "STOPWORDS2", ..], "DIR/STOPWORDS.txt" or ["DIR/STOPWORDS.txt", ...] as input.
+            `load_default`: Whether to load default stopwords. It can be seen from utils/stopwords/zh/*.
+        Type:
+            `stopwords`   : string or list of string (Default: None)
+            `load_default`: bool (Default: True)
+        Return:
+            List of stopwords.
+            rtype: list of string
+        """
+
+        """ Check args """
         if not stopwords and not load_default:
             return []
 
+        """ Load Custom Stopwords """
         given = list()
         if stopwords:
             logger.debug("Loading stopwords given ...")
@@ -183,6 +200,8 @@ class KeyExtractor:
         else:
             logger.debug("No stopwords given.")
 
+        """ Load Default Stopwords """
+        ## Default stopwords are stored in utils/stopwords/zh/*.
         default = list()
         if load_default:
             from .utils.stopwords.zh import baidu, hit, scu, zhcn, zhtw
@@ -201,6 +220,8 @@ class KeyExtractor:
         else:
             logger.debug("No default keywords.")
 
+        """ Integration """
+        ## Use set operation to ensure there are no duplicates stopwords in the return list.
         ret = list()
         ret.extend(given)
         ret.extend(default)
