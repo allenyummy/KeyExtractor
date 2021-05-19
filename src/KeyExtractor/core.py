@@ -25,10 +25,34 @@ logger = logging.getLogger(__name__)
 
 class KeyExtractor:
     def __init__(self, embedding_method_or_model: str):
+        """
+        Init KeyExtractor.
 
+        KeyExtractor can extract keywords from chinese documents.
+
+        Args:
+            `embedding_method_or_model`: a model name from huggingface model hub or a model local path.
+        Type:
+            `embedding_method_or_model`: string.
+        Return:
+            None
+        """
+
+        ## Tokenization could be a feature, but it could make operation slower.
+        ## So I think it would be better to do tokenization outside KeyExtractor.
         # self.tokenizer = tk.TokenizerFactory(tokenization_method_or_model)
+
+        """ Word Embedding Model """
+        ## Use Flair framework to load transformers-based word embeddings model
         self.word_embed_model = TransformerWordEmbeddings(embedding_method_or_model)
+
+        """ Document Embedding Model """
+        ## Use Flair framework to load document pooling embeddings model
         self.doc_embed_model = DocumentPoolEmbeddings([self.word_embed_model])
+        ## Use Flair framework to load transformers-based document embeddings model.
+        ## TBMS, embeddings of [CLS] token is used as document embeddings.
+        ## I test this before but got a lower cosine similarity score. This may be because I do not fine tune it.
+        ## Another version of Flair, which has not yet released, support transformers-based pooling embeddings.
         # self.doc_embed_model = TransformerDocumentEmbeddings(embedding_method_or_model)
 
     def extract_keywords(
@@ -38,7 +62,27 @@ class KeyExtractor:
         load_default: Optional[bool] = True,
         n_gram: Optional[int] = 1,
         top_n: Optional[int] = 5,
-    ):
+    ) -> List[st.KeyStruct]:
+        """
+        Extract Keywords.
+
+        Args:
+            `text`        : An input text that is tokenized already.
+            `stopwords`   : A custom stopwords that you think they must not be keywords.
+                            It can take "STOPWORDS", ["STOPWORDS1", "STOPWORDS2", ..], "DIR/STOPWORDS.txt" or ["DIR/STOPWORDS.txt", ...] as input.
+            `load_default`: Whether to load default stopwords. It can be seen from utils/stopwords/zh/*.
+            `n_gram`      : N gram for content words as a keyword candidate.
+            `top_n`       : Top N keywords extracted.
+        Type:
+            `text`        : list of string
+            `stopwords`   : string or list of string (Default: None)
+            `load_default`: bool (Default: True)
+            `n_gram`      : integer (Default: 1)
+            `top_n`       : integer (Default: 5)
+        Return:
+            List of Keywords.
+            rtype: list of st.KeyStruct
+        """
 
         """ Preprocess """
         logger.debug("======== [[ PREPROCESS ]] ========")
