@@ -342,14 +342,32 @@ class KeyExtractor:
             word_embedding_list.append(mean_embedding)
         return word_embedding_list
 
-    def _postprocess(self, input: List[st.KeyStruct], top_n: Optional[int] = 5):
+    def _postprocess(
+        self, input: List[st.KeyStruct], top_n: Optional[int] = 5
+    ) -> List[st.KeyStruct]:
+        """
+        Postprocess results.
+        This function is for internal use.
 
-        ## Sort
+        Args:
+            `input`: A result list after _preprocess and _evaluate function.
+            `top_n`: Top N keywords extracted.
+        Type:
+            `input`: list of st.KeyStruct
+            `top_n`: integer (Default: 5)
+        Return:
+            List of Keywords.
+            rtype: list of st.KeyStruct
+        """
+
+        """ Sort """
+        ## Sort first and then we could remove duplicates which has lower score.
         logger.debug("[Step 1] Sorting ...")
         input = sorted(input, key=lambda k: k.score, reverse=True)
         logger.debug("[Step 1] Finish.")
 
-        ## Remove duplicates
+        """ Remove Duplicates """
+        ## Use st.__eq__() to determine duplicates.
         logger.debug("[Step 2] Removing duplicates ...")
         input_wo_dup = list()
         input_w_dup = list()
@@ -362,7 +380,7 @@ class KeyExtractor:
         logger.debug(f"Finally we removed {len(input_w_dup)} duplicates.")
         logger.debug("[Step 2] Finish.")
 
-        ## Top N
+        """ Choose TOP N """
         top_n = min(len(input_wo_dup), top_n)
         logger.debug(f"[Step 3] Getting Top {top_n} Keywords ...")
         ret = input_wo_dup[:top_n]
