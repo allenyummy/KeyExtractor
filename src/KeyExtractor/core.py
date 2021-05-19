@@ -410,6 +410,22 @@ class KeyExtractor:
     def word_embeddings_from_text(
         self, text: List[str], token_idx: int
     ) -> torch.tensor:
+        """
+        Look Up Word Embeddings based on Input Text. (Dynamic Embeddings)
+        This function is for external use.
+
+        Args:
+            `text`     : An input text that is tokenized already.
+            `token_idx`: A token index that you want to look up for based on an input text.
+        Type:
+            `text`     : list of string
+            `token_idx`: integer
+        Return:
+            Word Embeddings.
+            rtype: torch.tensor
+            rsize: torch.size([768])
+        """
+
         doc = Sentence(text)
         self.word_embed_model.embed(doc)
         return doc[token_idx].embedding
