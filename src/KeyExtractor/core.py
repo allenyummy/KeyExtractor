@@ -309,10 +309,29 @@ class KeyExtractor:
     def _get_word_embeddings(
         self, text: List[str], n_gram_text: List[List[Tuple[int, str]]]
     ) -> List[torch.tensor]:
+        """
+        Get Word Embeddings of each n-gram combination.
+        Note that Transformers-based Word Embeddings is dynamic base on nearby words.
+        This function is for internal use.
 
+        Args:
+            `text`        : An input text that is tokenized already.
+            `n_gram_text` : N gram combinations.
+        Type:
+            `text`        : list of string
+            `n_gram_text` : list of list of tuple of (integer, string)
+        Return:
+            List of Embeddings.
+            rtype: list of torch.tensor
+            rsize: list of torch.size([768])
+        """
+
+        """ Get EACH Token Embeddings """
         doc = Sentence(text)
         self.word_embed_model.embed(doc)
 
+        """ Get EACH N-Gram Embeddings """
+        ## stack token embeddings and mean them
         word_embedding_list = list()
         for each_n_gram in n_gram_text:
             embedding_list = [
