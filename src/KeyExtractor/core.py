@@ -431,6 +431,20 @@ class KeyExtractor:
         return doc[token_idx].embedding
 
     def word_embeddings(self, text: str) -> torch.tensor:
+        """
+        Look Up Word Embeddings NOT based on Input Text.
+        This function is for external use.
+
+        Args:
+            `text`     : An input word/token.
+        Type:
+            `text`     : string
+        Return:
+            Word Embeddings.
+            rtype: torch.tensor
+            rsize: torch.size([768])
+        """
+
         word = Sentence(text)
         self.word_embed_model.embed(word)
         return word[0].embedding
