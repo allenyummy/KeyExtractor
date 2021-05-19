@@ -230,15 +230,32 @@ class KeyExtractor:
 
         return ret
 
-    def _evaluate(self, text: List[str], n_gram_text: List[List[Tuple[int, str]]]):
+    def _evaluate(
+        self, text: List[str], n_gram_text: List[List[Tuple[int, str]]]
+    ) -> List[st.KeyStruct]:
+        """
+        Evaluate cosine similarity score between document and n-gram text based on their embeddings.
+        This function is for internal use.
 
-        ## Get doc embeddings
+        Args:
+            `text`        : An input text that is tokenized already.
+            `n_gram_text` : N gram combinations.
+        Type:
+            `text`        : list of string
+            `n_gram_text` : list of list of tuple of (integer, string)
+        Return:
+            List of Keywords.
+            rtype: list of st.KeyStruct
+        """
+
+        """ Get Document Embeddings """
         logger.debug("[Step 1] Loading document embeddings ...")
         doc_embeddings = self._get_doc_embeddings(text)
         logger.debug(f"We got {doc_embeddings.size()} document embeddings.")
         logger.debug("[Step 1] Finish.")
 
-        ## Get word embeddings of each n gram
+        """ Get Word Embeddings"""
+        ## Get word embeddings of each n gram combination
         logger.debug("[Step 2] Loading word embeddings of each n_gram combination ...")
         word_embeddings_list = self._get_word_embeddings(text, n_gram_text)
         logger.debug(
@@ -249,7 +266,9 @@ class KeyExtractor:
         )
         logger.debug("[Step 2] Finish.")
 
-        ## Calculate score and format results
+        """ Calculate Score """
+        ## Calculate cosine similarity score between document embeddings and word embeddings of each n-gram combination
+        ## Also, format the results as st.KeyStruct.
         logger.debug("[Step 3] Calculating score ...")
         results = list()
         for i, (each_n_gram, word_embeddings) in enumerate(
