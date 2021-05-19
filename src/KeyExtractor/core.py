@@ -391,6 +391,20 @@ class KeyExtractor:
         return ret
 
     def doc_embeddings(self, text: List[str]) -> torch.tensor:
+        """
+        Look Up Document Embeddings.
+        This function is for external use.
+
+        Args:
+            `text`: An input text that is tokenized already.
+        Type:
+            `text`: list of string
+        Return:
+            Document Embeddings.
+            rtype: torch.tensor
+            rsize: torcn.size([768]]
+        """
+
         return self._get_doc_embeddings(text)
 
     def word_embeddings_from_text(
