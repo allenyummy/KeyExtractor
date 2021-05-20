@@ -22,8 +22,9 @@ text1 = """監督學習是機器學習任務，它學習基於範例輸入-範�
     最佳方案將使演算法能夠正確確定未見實例的類標籤。
     這就要求學習算法以“合理”的方式將訓練數據推廣到看不見的情況（見歸納偏差）。"""
 text2 = "《進擊的巨人》（日語：進撃の巨人）是日本漫畫家諫山創創作的漫畫作品。漫畫於2009年9月至2021年4月間在講談社《別冊少年Magazine》上連載。故事建立在人類與巨人的衝突上，人類居住在由高牆包圍的城市，對抗會食人的巨人。"
+text3 = "中國信託商業銀行是中華民國的大型商業銀行之一。"
 
-text_list = [text0, text1, text2]
+text_list = [text0, text1, text2, text3]
 
 
 ####################################################
@@ -75,3 +76,8 @@ def testcase1(testcase_all):
 @pytest.fixture(scope="session")
 def testcase2(testcase_all):
     return testcase_all[2]
+
+
+@pytest.fixture(scope="session")
+def testcase3(testcase_all):
+    return testcase_all[3]
