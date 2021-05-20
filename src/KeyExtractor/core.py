@@ -218,7 +218,7 @@ class KeyExtractor:
             default = list(set(default))
             logger.debug(f"We got {len(default)} stopwords.")
         else:
-            logger.debug("No default keywords.")
+            logger.debug("No default stopwords.")
 
         """ Integration """
         ## Use set operation to ensure there are no duplicates stopwords in the return list.
