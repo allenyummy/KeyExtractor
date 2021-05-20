@@ -8,14 +8,7 @@ from KeyExtractor.utils import struct as st
 logger = logging.getLogger(__name__)
 
 
-def test_return(testcase3, extractor):
-    tokenized_text = testcase3["tokenized_text"]
-    _, n_gram_text = extractor._preprocess(tokenized_text)
-    results = extractor._evaluate(tokenized_text, n_gram_text)
-    assert all(isinstance(res, st.KeyStruct) for res in results)
-
-
-def test_calculate_score(testcase3, extractor):
+def test__evaluate_calculate_score(testcase3, extractor):
     tokenized_text = testcase3["tokenized_text"]
     _, n_gram_text = extractor._preprocess(tokenized_text)
     results = extractor._evaluate(tokenized_text, n_gram_text)
