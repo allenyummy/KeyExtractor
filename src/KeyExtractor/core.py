@@ -130,7 +130,7 @@ class KeyExtractor:
         ## Input text must be tokenized by users.
         if not (isinstance(text, list) and all(isinstance(i, str) for i in text)):
             raise ValueError(
-                "Text must be tokenized ! Expected text to be List[str], but got type(text). "
+                f"Text must be tokenized ! Expected text to be List[str], but got {type(text)}."
             )
 
         """ Get/Load Stopwords """
