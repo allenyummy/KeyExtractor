@@ -22,9 +22,6 @@ def is_list_of_string(input):
 
 def load(input: Union[str, List[str]]) -> List[str]:
 
-    if not input:
-        return []
-
     if not is_string(input) and not is_list_of_string(input):
         raise ValueError(f"Expected string or list of string, but got {type(input)}")
 
