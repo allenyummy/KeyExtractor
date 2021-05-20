@@ -8,7 +8,7 @@ import pytest
 logger = logging.getLogger(__name__)
 
 
-def test_exception1(extractor):
+def test__preprocess_exception1(extractor):
     with pytest.raises(ValueError) as excinfo:
         extractor._preprocess(123)
     assert (
@@ -17,7 +17,7 @@ def test_exception1(extractor):
     )
 
 
-def test_exception2(extractor):
+def test__preprocess_exception2(extractor):
     with pytest.raises(ValueError) as excinfo:
         extractor._preprocess(["輸入", 123])
     assert (

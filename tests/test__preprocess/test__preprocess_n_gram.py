@@ -8,7 +8,7 @@ from asserts import assertEquals
 logger = logging.getLogger(__name__)
 
 
-def test_n_gram(testcase2, extractor):
+def test__preprocess_n_gram(testcase2, extractor):
     tokenized_text = testcase2["tokenized_text"]
     content_text, n_gram_text = extractor._preprocess(
         tokenized_text,
