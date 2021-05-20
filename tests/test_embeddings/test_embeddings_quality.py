@@ -9,20 +9,6 @@ from KeyExtractor.utils import evaluation as ev
 logger = logging.getLogger(__name__)
 
 
-def test_document_embeddings_size(testcase_all, extractor):
-    for _, testcase in testcase_all.items():
-        tokenized_text = testcase["tokenized_text"]
-        doc_embeddings = extractor.doc_embeddings(tokenized_text)
-        assert doc_embeddings.size() == torch.Size([768])
-
-
-def test_word_embeddings_size(testcase_all, extractor):
-    for _, testcase in testcase_all.items():
-        token = testcase["tokenized_text"][0]
-        word_embeddings = extractor.word_embeddings(token)
-        assert word_embeddings.size() == torch.Size([768])
-
-
 def test_word_embeddings_quality(testcase2, extractor):
     tokenized_text = testcase2["tokenized_text"]
     logger.debug(f"token 19: {tokenized_text[19]}")  ##漫畫
