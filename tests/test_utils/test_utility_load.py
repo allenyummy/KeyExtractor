@@ -3,9 +3,27 @@
 # Description: Test utility function
 
 import logging
+import pytest
 from KeyExtractor.utils import utility as ut
 
 logger = logging.getLogger(__name__)
+
+
+def test_exception1():
+    with pytest.raises(ValueError) as excinfo:
+        ut.load(123)
+    assert (
+        str(excinfo.value) == "Expected string or list of string, but got <class 'int'>"
+    )
+
+
+def test_exception2():
+    with pytest.raises(ValueError) as excinfo:
+        ut.load(["輸入", 123])
+    assert (
+        str(excinfo.value)
+        == "Expected string or list of string, but got <class 'list'>"
+    )
 
 
 def test_load_string():
